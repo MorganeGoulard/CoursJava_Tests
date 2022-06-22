@@ -14,8 +14,8 @@ public class StringUtils {
         }
     }
 
-
-    public static boolean isAnagram(String str1,String str2) {
+// Version Christian
+    /*public static boolean isAnagram(String str1,String str2) {
         String[] str1Format = (str1.replaceAll("[^A-Za-z]", "").toLowerCase(Locale.ROOT).split(""));
         String[] str2Format = (str2.replaceAll("[^A-Za-z]", "").toLowerCase(Locale.ROOT).split(""));
 
@@ -39,6 +39,33 @@ public class StringUtils {
 
         return (!arrStr1.toString().equals(arrStr2.toString()));
 
+    }*/
+
+    // version Mickael
+    public static boolean isAnagram(String str1,String str2) {
+        String[] str1Format = (str1.replaceAll("[^A-Za-z]", "").toLowerCase(Locale.ROOT).split(""));
+        String[] str2Format = (str2.replaceAll("[^A-Za-z]", "").toLowerCase(Locale.ROOT).split(""));
+
+        Arrays.sort(str1Format);
+        Arrays.sort(str2Format);
+
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+//        String building
+        StringBuilder  arrStr1=new StringBuilder();
+        for(String letter:str1Format){
+            arrStr1.append(letter);
+        }
+
+        StringBuilder  arrStr2=new StringBuilder();
+        for(String letter:str2Format){
+            arrStr2.append(letter);
+        }
+
+        return (arrStr1.toString().equals(arrStr2.toString()));
+
     }
 
 
@@ -53,11 +80,34 @@ public class StringUtils {
 
 
     //    Test si une chaine passé en paramètre est un palindrome
-    public static boolean isPalindrom(String str) {
+   /* version Christian -  public static boolean isPalindrom(String str) {
         String formattedStr=str.replaceAll("[^A-Za-z]","");
         String reversedStr=reverseString(formattedStr);
 
         return  formattedStr.equals(reversedStr);
+    }*/
+
+    // version Mansour
+    public static boolean isPalindrom(String str) {
+
+        if(str.contains(" ")) {
+            String[] tableStr = str.split(" ");
+            String str1 = "";
+            for (int i = 0; i < tableStr.length; i++) {
+                str1 = tableStr[i].join("");
+            }
+            String formattedStrLowerCase = str1.toLowerCase();
+            String formattedStr = formattedStrLowerCase.replaceAll("[^A-Za-z]", "");
+            String reversedStr = reverseString(formattedStrLowerCase);
+            return  formattedStr.equals(reversedStr);
+        }else {
+            String formattedStrLowerCase = str.toLowerCase();
+            String formattedStr = formattedStrLowerCase.replaceAll("[^A-Za-z]", "");
+            String reversedStr = reverseString(formattedStrLowerCase);
+            return  formattedStr.equals(reversedStr);
+
+        }
+
     }
 
     //    Renverser un entier :  10 => 1 , -89 => -98
